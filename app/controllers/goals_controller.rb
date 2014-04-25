@@ -5,20 +5,27 @@ class GoalsController < ApplicationController
   # GET /goals.json
   def index
     @goals = Goal.all
+    @title = "Your Goals"
   end
 
   # GET /goals/1
   # GET /goals/1.json
   def show
+    @title = "A Goal"
+    render "show", layout: "table"
   end
 
   # GET /goals/new
   def new
     @goal = Goal.new
+    @title = 'New Goal'
+    render "new", layout: "table"
   end
 
   # GET /goals/1/edit
   def edit
+    @title = "Change your Goal"
+    render "edit", layout: "table"
   end
 
   # POST /goals
