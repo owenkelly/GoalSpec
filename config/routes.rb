@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :goal_updates
+
+  resources :users
+  resources :sub_goals
+
   get 'welcome/index'
   get 'welcome/index/:expand', to: 'welcome#index'
   #get 'welcome/whatgoals', to: 'welcome#whatgoals'

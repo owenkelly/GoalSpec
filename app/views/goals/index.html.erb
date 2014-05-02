@@ -20,6 +20,7 @@
         <td><%= goal.start %></td>
         <td><%= goal.end %></td>
         <td><%= goal.recurrance %></td>
+        <td><%= link_to "Create SubGoal", new_sub_goal_path(:goal_id => goal) %>
         <td><%= link_to 'Show', goal %></td>
         <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
         <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
