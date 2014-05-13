@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
 	has_many :goals
-	scope :has_goals? -> { where(User.goals > 0)}
+
+	validates :username, presence: true
+	validates :password, length: {in: 8..20}, confirmation: true
+	validates :password_confirmation, presence: true
+
 end

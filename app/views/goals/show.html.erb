@@ -24,6 +24,20 @@
   <strong>Recurrance:</strong>
   <%= @goal.recurrance %>
 </p>
-
+<% if @goal.id != nil %>
+  <p>
+  <strong>MetaGoal:</strong>
+  <% Goal.where(id: @goal.metagoal_id).each do |metagoal| %>
+    <%= link_to "#{metagoal.goal}", metagoal %>
+    <%end%>
+  </p>
+<% else %>
+    <p>
+  <strong>SubGoals:</strong>
+  <% Goal.where(metagoal_id: @goal.id).each do |subgoal| %>
+    <%= link_to "#{subgoal.goal}", subgoal %>
+  <%end%>
+  </p>
+<%end%>
 <%= link_to 'Edit', edit_goal_path(@goal) %> |
 <%= link_to 'Back', goals_path %>

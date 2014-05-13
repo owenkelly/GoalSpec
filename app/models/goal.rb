@@ -1,6 +1,12 @@
 class Goal < ActiveRecord::Base
 	belongs_to :user
+
 	has_many :goal_updates
-	has_many :child_goals, :through => :sub_goals
-	scope :daily, -> { where(recurrance: 'daily')}
+
+	has_many :subgoals, class_name: "Goals",
+						foreign_key: "metagoal_id"
+	belongs_to :metagoal
+
+	scope :daily, -> { where(recurrance: "Daily") }
+	scope :metagoal, -> { where(metagoal_id: nil) }
 end

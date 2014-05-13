@@ -17,7 +17,7 @@ class GoalsController < ApplicationController
 
   # GET /goals/new
   def new
-    @goal = Goal.new
+    @goal = Goal.new(:metagoal_id => params[:metagoal_id].to_i)
     @title = 'New Goal'
     render "new", layout: "table"
   end
@@ -69,6 +69,8 @@ class GoalsController < ApplicationController
   end
 
   private
+
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_goal
       @goal = Goal.find(params[:id])
@@ -76,6 +78,6 @@ class GoalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:goal, :reason, :start, :end, :recurrance)
+      params.require(:goal).permit(:goal, :reason, :start, :end, :recurrance, :metagoal_id)
     end
 end
