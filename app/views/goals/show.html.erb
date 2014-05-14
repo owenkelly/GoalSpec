@@ -24,7 +24,7 @@
   <strong>Recurrance:</strong>
   <%= @goal.recurrance %>
 </p>
-<% if @goal.id != nil %>
+<% if @goal.metagoal_id != nil %>
   <p>
   <strong>MetaGoal:</strong>
   <% Goal.where(id: @goal.metagoal_id).each do |metagoal| %>
