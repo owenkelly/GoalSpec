@@ -1,4 +1,4 @@
-<%= form_for(@goal) do |f| %>
+ <%= form_for(@goal) do |f| %>
   <% if @goal.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@goal.errors.count, "error") %> prohibited this goal from being saved:</h2>
@@ -32,6 +32,17 @@
     <%= f.text_field :recurrance %>
     <%= f.hidden_field :metagoal_id %>
   </div>
+
+<p><h1> SubGoal </h1>
+  <% f.collection_select(:id, Goal.all, :metagoal_id, :goal, {include_blank: true}) %>
+  </p>
+
+<p><h1> MetaGoal </h1>
+  <%= f.collection_select(:metagoal_id, Goal.all, :id, :goal, {include_blank: true}) %>
+</p>
+
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
