@@ -7,6 +7,10 @@ class Goal < ActiveRecord::Base
 						foreign_key: "metagoal_id"
 	belongs_to :metagoal
 
+	validates :goal, presence: true
+
+	
+
 	scope :daily, -> { where(recurrance: "Daily") }
 	scope :metagoal, -> { where(metagoal_id: nil) }
 end
