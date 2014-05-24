@@ -33,9 +33,6 @@
     <%= f.hidden_field :metagoal_id %>
   </div>
 
-<p><h1> SubGoal </h1>
-  <% f.collection_select(:id, Goal.all, :metagoal_id, :goal, {include_blank: true}) %>
-  </p>
 
 <p><h1> MetaGoal </h1>
   <%= f.collection_select(:metagoal_id, Goal.all, :id, :goal, {include_blank: true}) %>
