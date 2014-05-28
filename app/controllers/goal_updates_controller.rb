@@ -1,6 +1,7 @@
 class GoalUpdatesController < ApplicationController
   before_action :set_goal_update, only: [:show, :edit, :update, :destroy]
 
+  before_action :authenticate_user!
   # GET /goal_updates
   # GET /goal_updates.json
   def index

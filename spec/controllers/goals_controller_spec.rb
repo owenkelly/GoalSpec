@@ -18,7 +18,7 @@ require_relative '../spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe GoalsController do
+describe GoalsController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Goal. As you add validations to Goal, be sure to
@@ -30,6 +30,14 @@ describe GoalsController do
   # in order to pass any filters (e.g. authentication) defined in
   # GoalsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+
+  before(:each) do
+    sign_in(:user)
+  end
+
+  after(:each) do
+    sign_out(:user)
+  end
 
   describe "GET index" do
     it "assigns all goals as @goals" do

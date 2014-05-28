@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :goal_updates
 
-  resources :users
+  
   resources :sub_goals
 
   get 'welcome/index'
