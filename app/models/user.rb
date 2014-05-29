@@ -4,9 +4,16 @@ class User < ActiveRecord::Base
   	devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 	has_many :goals
+	after_create :notify_user
 
-	validates :email, presence: true
-	validates :password, length: {in: 8..20}, confirmation: true
-	validates :password_confirmation, presence: true
+	#attr_accessor :email, :password, :password_confirmation, :encrypted_password, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip,
+					#:sign_in_count
+
+	private
+	def notify_user
+		AdminMailer.welcome_new(self).deliver
+	end
+
+
 
 end

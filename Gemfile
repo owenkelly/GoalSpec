@@ -8,10 +8,13 @@ gem 'rails', '4.1.0'
 gem 'devise'
 
 
+
 group :test, :development do
 	gem 'rspec-rails'
 	gem 'capybara'
 	gem 'sqlite3'
+	gem 'factory_girl_rails', "~> 4.4.0"
+	gem 'database_cleaner'
 end
 
 group :production do

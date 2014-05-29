@@ -32,11 +32,8 @@ describe GoalsController, :type => :controller do
   let(:valid_session) { {} }
 
   before(:each) do
-    sign_in(:user)
-  end
-
-  after(:each) do
-    sign_out(:user)
+    user = build(:user)
+    sign_in(user)
   end
 
   describe "GET index" do

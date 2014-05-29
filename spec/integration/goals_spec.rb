@@ -27,7 +27,6 @@ describe "Goals Integration" do
 	end
 
 
-
-	end
+	
 
 end
