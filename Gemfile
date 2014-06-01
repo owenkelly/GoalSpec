@@ -7,18 +7,18 @@ gem 'rails', '4.1.0'
 
 gem 'devise'
 
+gem 'pg'
+
 
 
 group :test, :development do
 	gem 'rspec-rails'
 	gem 'capybara'
-	gem 'sqlite3'
 	gem 'factory_girl_rails', "~> 4.4.0"
 	gem 'database_cleaner'
 end
 
 group :production do
-	gem 'pg'
 	gem 'rails_12factor'
 end
 # Use SCSS for stylesheets
