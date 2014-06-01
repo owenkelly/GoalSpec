@@ -1,5 +1,5 @@
 class AdminMailer < ActionMailer::Base
-  default from: "admin@boiling-ridge-6865.herokuapp.com"
+  default from: "owen.james.kelly@gmail.com"
 
   	def welcome_new user
   		@url = new_user_session_path
