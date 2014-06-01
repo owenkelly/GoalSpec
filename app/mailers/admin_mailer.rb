@@ -1,5 +1,5 @@
 class AdminMailer < ActionMailer::Base
-  default from: "admin@goalspec.com"
+  default from: ""
 
   	def welcome_new user
   		@url = new_user_session_path
