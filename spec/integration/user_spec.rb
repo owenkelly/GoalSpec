@@ -1,9 +1,9 @@
 require_relative '../spec_helper'
 
- #before :each do
-   # @user = create :user
-    #sign_in @user
-  #end
+before :each do
+    @user = FactoryGirl.create(:user)
+	login_as(@user, :scope => :user)
+end
 
 
 describe "user creation" do
