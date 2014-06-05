@@ -30,6 +30,8 @@ describe "signing in and out" do
 		current_user.should be_true
 	end
 
+	it "should allow me to sign out" do
+		logout(@user)
 
 
 end

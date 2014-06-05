@@ -13,7 +13,10 @@ gem 'cancancan', '~>1.8'
 
 
 
+
 group :test, :development do
+
+	gem 'rake'
 	gem 'rspec-rails'
 	gem 'capybara'
 	gem 'sqlite3'
