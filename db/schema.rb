@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605233121) do
+ActiveRecord::Schema.define(version: 20140605233715) do
 
   create_table "goal_relationships", force: true do |t|
     t.integer  "goal_id"
