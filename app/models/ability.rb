@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
 
     #alias_action :create, :read, :update, :destroy, :put, :to => :crud
-
+  
     can :manage, :all, :user_id => user.id
     
     end

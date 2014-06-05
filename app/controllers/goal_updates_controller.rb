@@ -4,6 +4,8 @@ class GoalUpdatesController < ApplicationController
   before_action :set_goal
 
   before_action :authenticate_user!
+
+  load_and_authorize_resource
   # GET /goal_updates
   # GET /goal_updates.json
   def index
