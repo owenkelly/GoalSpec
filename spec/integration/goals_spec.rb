@@ -17,13 +17,13 @@ describe "Goals Integration" do
 			Goal.count.should eq goal_count+1
 		end
 
-		it "should be able to assign a metagoal to the current goal" do
-		metagoal = Goal.create(goal: "make a cake")
+		it "should be able to assign a supergoal to the current goal" do
+		supergoal = Goal.create(goal: "make a cake")
 		goal = Goal.create(goal: "make a pie")
 		visit edit_goal_path(goal)
-		select('make a cake', from: 'goal_metagoal_id')
+		select('make a cake', from: 'goal_supergoal_id')
 		click_link_or_button "Update Goal"
-		goal.reload.metagoal_id.should eq metagoal.id
+		goal.reload.supergoal_id.should eq supergoal.id
 	end
 
 

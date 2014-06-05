@@ -1,11 +1,13 @@
 class GoalUpdatesController < ApplicationController
   before_action :set_goal_update, only: [:show, :edit, :update, :destroy]
 
+  before_action :set_goal
+
   before_action :authenticate_user!
   # GET /goal_updates
   # GET /goal_updates.json
   def index
-    @goal_updates = GoalUpdate.all
+    @goal_updates = GoalUpdate.where(goal_id: @goal.id)
   end
 
   # GET /goal_updates/1
@@ -29,7 +31,7 @@ class GoalUpdatesController < ApplicationController
 
     respond_to do |format|
       if @goal_update.save
-        format.html { redirect_to @goal_update, notice: 'Goal update was successfully created.' }
+        format.html { redirect_to [@goal, @goal_update], notice: 'Goal update was successfully created.' }
         format.json { render :show, status: :created, location: @goal_update }
       else
         format.html { render :new }
@@ -43,7 +45,7 @@ class GoalUpdatesController < ApplicationController
   def update
     respond_to do |format|
       if @goal_update.update(goal_update_params)
-        format.html { redirect_to @goal_update, notice: 'Goal update was successfully updated.' }
+        format.html { redirect_to [@goal, @goal_update], notice: 'Goal update was successfully updated.' }
         format.json { render :show, status: :ok, location: @goal_update }
       else
         format.html { render :edit }
@@ -57,7 +59,7 @@ class GoalUpdatesController < ApplicationController
   def destroy
     @goal_update.destroy
     respond_to do |format|
-      format.html { redirect_to goal_updates_url }
+      format.html { redirect_to goal_goal_updates_url }
       format.json { head :no_content }
     end
   end
@@ -66,6 +68,10 @@ class GoalUpdatesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_goal_update
       @goal_update = GoalUpdate.find(params[:id])
+    end
+
+    def set_goal
+      @goal = Goal.find(params[:goal_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

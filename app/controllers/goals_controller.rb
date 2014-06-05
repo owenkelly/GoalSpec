@@ -1,4 +1,5 @@
 class GoalsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_goal, only: [:show, :edit, :update, :destroy]
 
   before_action :authenticate_user!
@@ -6,8 +7,9 @@ class GoalsController < ApplicationController
   # GET /goals
   # GET /goals.json
   def index
-    @goals = Goal.all
+    @goals = Goal.where(:user_id => current_user.id)
     @title = "Your Goals"
+    @expand_subgoal = params[:expand_subgoal]
   end
 
   # GET /goals/1
@@ -19,7 +21,7 @@ class GoalsController < ApplicationController
 
   # GET /goals/new
   def new
-    @goal = Goal.new(:metagoal_id => params[:metagoal_id].to_i)
+    @goal = Goal.new(:user_id => params[:user_id].to_i)
     @title = 'New Goal'
     render "new", layout: "table"
   end
@@ -80,6 +82,8 @@ class GoalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:goal, :reason, :start, :end, :recurrance, :metagoal_id)
+      params.require(:goal).permit(:goal, :description, :start, :end, :user_id, supergoal_ids: [], subgoal_ids: [])
     end
+
+
 end

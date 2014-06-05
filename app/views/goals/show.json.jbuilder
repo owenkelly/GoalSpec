@@ -1,1 +1,1 @@
-json.extract! @goal, :id, :goal, :reason, :start, :end, :recurrance, :created_at, :updated_at
+json.extract! @goal, :id, :goal, :description, :start, :end, :recurrance, :created_at, :updated_at

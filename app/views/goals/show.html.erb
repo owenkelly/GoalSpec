@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong>Reason:</strong>
-  <%= @goal.reason %>
+  <strong>Description:</strong>
+  <%= @goal.description %>
 </p>
 
 <p>
@@ -20,24 +20,20 @@
   <%= @goal.end %>
 </p>
 
-<p>
-  <strong>Recurrance:</strong>
-  <%= @goal.recurrance %>
-</p>
-<% if @goal.metagoal_id != nil %>
-  <p>
-  <strong>MetaGoal:</strong>
-  <% Goal.where(id: @goal.metagoal_id).each do |metagoal| %>
-    <%= link_to "#{metagoal.goal}", metagoal %>
+
+  <strong>Subgoal To:</strong>
+  <% @goal.subgoals.each do |subgoal| %>
+    <%= link_to "#{subgoal.goal}", subgoal %>
     <%end%>
   </p>
-<% else %>
+
     <p>
-  <strong>SubGoals:</strong>
-  <% Goal.where(metagoal_id: @goal.id).each do |subgoal| %>
-    <%= link_to "#{subgoal.goal}", subgoal %>
+  <strong>Subgoals:</strong>
+  <% find_subgoals(@goal).each do |supergoal| %>
+      <% g = Goal.find(supergoal.goal_id) %>
+    <%= link_to "#{g.goal}", g %>
   <%end%>
   </p>
-<%end%>
 <%= link_to 'Edit', edit_goal_path(@goal) %> |
-<%= link_to 'Back', goals_path %>
+<%= link_to 'Back', goals_path %> |
+<%# link_to 'Delete', @goal, method: :delete, data: { confirm: 'Are you sure?' } %>

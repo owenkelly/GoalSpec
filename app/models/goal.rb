@@ -3,14 +3,20 @@ class Goal < ActiveRecord::Base
 
 	has_many :goal_updates
 
-	has_many :subgoals, class_name: "Goals",
-						foreign_key: "metagoal_id"
-	belongs_to :metagoal
+	has_many :goal_relationships
+									
+	has_many :subgoals, :class_name => "Goal",
+						:foreign_key => "subgoal_id",
+						through: :goal_relationships
+
+	has_many :supergoals, :class_name => "Goal",
+					:foreign_key => "goal_id",
+					through: :goal_relationships
 
 	validates :goal, presence: true
 
 	
+	
+	
 
-	scope :daily, -> { where(recurrance: "Daily") }
-	scope :metagoal, -> { where(metagoal_id: nil) }
 end

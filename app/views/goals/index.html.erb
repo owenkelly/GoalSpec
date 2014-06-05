@@ -1,34 +1,41 @@
 <h1>Listing goals</h1>
 
 <table>
-  <thead>
+<thead>
     <tr>
       <th>Goal</th>
-      <th>Reason</th>
-      <th>Start</th>
-      <th>End</th>
-      <th>Recurrance</th>
+      <th>Due Date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @goals.where(metagoal_id: nil).each do |goal| %>
+    <% @goals.each do |goal|  %>
       <tr>
-        <td><%= goal.goal %></td>
-        <td><%= goal.reason %></td>
-        <td><%= goal.start %></td>
+        <% if goal.subgoals == [] %>
+        <td><%= link_to goal.goal, goal %></td>
         <td><%= goal.end %></td>
-        <td><%= goal.recurrance %></td>
-        <td><%= link_to "Create SubGoal", new_goal_path(metagoal_id: goal.id) %>
-        <td><%= link_to 'Show', goal %></td>
-        <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
-        <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= toggle_subgoals goal %>
+        <td><%= link_to "View updates", goal_goal_updates_path(goal.id) %> </td>
+        <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+        <% if @expand_subgoal.to_i == goal.id %>
+          <% find_subgoals(goal).each do |g| %>
+            <% subgoal = Goal.find(g.goal_id) %>
+            <tr>
+            
+               <td><%= link_to subgoal.goal, subgoal %></td>
+                <td><%= subgoal.end %></td>
+                <td><%= toggle_subgoals subgoal %></td>
+                <td><%= link_to "View updates", goal_goal_updates_path(goal.id) %> </td>
+                <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+                </tr>
+                <% end %>
+                <% end %>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Goal', new_goal_path %>
+<%= link_to 'New Goal', new_goal_path(user_id: current_user.id) %>

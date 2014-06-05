@@ -7,6 +7,10 @@ gem 'rails', '4.1.0'
 
 gem 'devise'
 
+gem "simple_calendar", "~> 1.1.0"
+
+gem 'cancancan', '~>1.8'
+
 
 
 group :test, :development do

@@ -26,4 +26,4 @@ production:
   database: project_production
   pool: 5
   username: derp
-  password: le
+  password: lerp

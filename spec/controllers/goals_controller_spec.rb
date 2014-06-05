@@ -24,7 +24,7 @@ describe GoalsController, :type => :controller do
   # Goal. As you add validations to Goal, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) { { "goal" => "MyString" } }
-  let(:child_goal) { {"metagoal_id" => @valid_attributes.id} }
+  let(:child_goal) { {"supergoal_id" => @valid_attributes.id} }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in

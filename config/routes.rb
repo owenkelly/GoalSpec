@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :goal_updates
-
   
-  resources :sub_goals
+
+  resources :goals do
+    resources :goal_updates
+  end
 
   get 'welcome/index'
   get 'welcome/index/:expand', to: 'welcome#index'
+  get 'goals/index/:metagoal_id', to: 'goals#index'
   #get 'welcome/whatgoals', to: 'welcome#whatgoals'
-  resources :goals
+  
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
