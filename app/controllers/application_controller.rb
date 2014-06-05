@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :goal_due, :goal_name
 
-  #before_filter :set_time_zone, if: :user_signed_in?
+  before_filter :set_time_zone, if: :user_signed_in?
 
 
   def goal_due
@@ -20,10 +20,10 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to :back, :alert => exception.message
   end
-  #private
+  private
 
-    #def set_time_zone
-      #Time.zone = current_user.time_zone
-   # end
+    def set_time_zone
+      Time.zone = current_user.time_zone
+    end
 
 end

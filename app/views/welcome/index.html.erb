@@ -16,16 +16,15 @@
 <h2>GoalSpec</h2>
 
 
-<%= month_calendar do |date| %>
-  <%= date %>
-<% end %>
 
 
 <p><%= link_to "What is GoalSpec?", welcome_index_path(expand: "show")%></p>
 <p><%= toggle_partial "whatgoals" %></p>
 <p><%= link_to 'Click here to make a Goal!', new_goal_path %></p>
 <p><%= link_to 'Click here to view your Goals!', goals_path %></p>
+<%# if @user.signed_in? %>
 <p>Upcoming Goals: <%= @goal_name%> by <%=@goal_due%>
+<%# end %>
 
 
   

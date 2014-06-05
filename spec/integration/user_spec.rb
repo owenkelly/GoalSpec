@@ -1,5 +1,9 @@
 require_relative '../spec_helper'
 
+ #before :each do
+   # @user = create :user
+    #sign_in @user
+  #end
 
 
 describe "user creation" do
@@ -19,9 +23,11 @@ end
 describe "signing in and out" do
 
 	it "should allow me to sign in" do
-		visit welcome_index_path
+		visit new_user_session_path
+		fill_in "Email", with: "derp@lerp.com"
+		fill_in "Password", with: "lerpderp"
 		click_link_or_button "Sign in"
-		fill_in "Email", with: 'owen.james.kelly@gmail.com'
+		current_user.should be_true
 	end
 
 

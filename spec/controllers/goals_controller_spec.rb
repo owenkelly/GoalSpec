@@ -31,9 +31,9 @@ describe GoalsController, :type => :controller do
   # GoalsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  before(:each) do
-    user = build(:user)
-    sign_in(user)
+   before :each do
+    @user = create :user
+    sign_in @user
   end
 
   describe "GET index" do

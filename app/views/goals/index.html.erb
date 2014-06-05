@@ -1,35 +1,29 @@
 <h1>Listing goals</h1>
 
-<table>
-<thead>
+
+
+<table class="table" >
+<thead >
     <tr>
-      <th>Goal</th>
-      <th>Due Date</th>
+      <th class="text-center">Goal</th>
+      <th class="text-center">Due Date</th>
+      <th class="text-center">Updates</th>
       <th colspan="3"></th>
     </tr>
   </thead>
   <tbody>
-    <% @goals.each do |goal|  %>
+    <% active_or_complete(@goals).each do |goal|  %>
       <tr>
         <% if goal.subgoals == [] %>
         <td><%= link_to goal.goal, goal %></td>
-        <td><%= goal.end %></td>
-        <td><%= toggle_subgoals goal %>
+        <td><%= goal.end.to_s(:long_ordinal) %></td>
         <td><%= link_to "View updates", goal_goal_updates_path(goal.id) %> </td>
-        <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-        <% if @expand_subgoal.to_i == goal.id %>
-          <% find_subgoals(goal).each do |g| %>
+            <% find_subgoals(goal).each do |g| %>
             <% subgoal = Goal.find(g.goal_id) %>
-            <tr>
-            
-               <td><%= link_to subgoal.goal, subgoal %></td>
-                <td><%= subgoal.end %></td>
-                <td><%= toggle_subgoals subgoal %></td>
-                <td><%= link_to "View updates", goal_goal_updates_path(goal.id) %> </td>
-                <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-                </tr>
+            <%= render partial: 'layouts/table_row', locals: {subgoal: subgoal} %>
+              
                 <% end %>
-                <% end %>
+              
       </tr>
       <% end %>
     <% end %>
@@ -38,4 +32,5 @@
 
 <br>
 
-<%= link_to 'New Goal', new_goal_path(user_id: current_user.id) %>
+<%= link_to 'New Goal', new_goal_path(user_id: current_user.id) %> |
+<%= complete_toggle %>

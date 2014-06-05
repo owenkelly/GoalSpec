@@ -33,6 +33,11 @@ describe UsersController, :type => :controller do
   # UsersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  before :each do
+    @user = create :user
+    sign_in @user
+  end
+
   describe "invalid login" do
     it "should raise an error when no username is entered" do
       user = User.create invalid_username
@@ -106,14 +111,14 @@ describe UsersController, :type => :controller do
       it "assigns a newly created but unsaved user as @user" do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
-        post :create, {:user => { "username" => "invalid value" }}, valid_session
+        post :create, {:user => { "email" => "invalid value" }}, valid_session
         assigns(:user).should be_a_new(User)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
-        post :create, {:user => { "username" => "invalid value" }}, valid_session
+        post :create, {:user => { "email" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end

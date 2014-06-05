@@ -8,6 +8,7 @@ class GoalUpdatesController < ApplicationController
   # GET /goal_updates.json
   def index
     @goal_updates = GoalUpdate.where(goal_id: @goal.id)
+    @current_goal = params[:goal_id]
   end
 
   # GET /goal_updates/1

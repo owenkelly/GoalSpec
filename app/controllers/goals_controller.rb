@@ -10,26 +10,27 @@ class GoalsController < ApplicationController
     @goals = Goal.where(:user_id => current_user.id)
     @title = "Your Goals"
     @expand_subgoal = params[:expand_subgoal]
+    @complete = params[:complete]
   end
 
   # GET /goals/1
   # GET /goals/1.json
   def show
     @title = "A Goal"
-    render "show", layout: "table"
+    render "show"
   end
 
   # GET /goals/new
   def new
     @goal = Goal.new(:user_id => params[:user_id].to_i)
     @title = 'New Goal'
-    render "new", layout: "table"
+    render "new"
   end
 
   # GET /goals/1/edit
   def edit
     @title = "Change your Goal"
-    render "edit", layout: "table"
+    render "edit"
   end
 
   # POST /goals
@@ -67,10 +68,18 @@ class GoalsController < ApplicationController
   def destroy
     @goal.destroy
     respond_to do |format|
-      format.html { redirect_to goals_url }
+      format.html { redirect_to goals_path }
       format.json { head :no_content }
     end
   end
+
+
+  def mark_complete
+    @goal = Goal.find(params[:goal_id])
+    @goal.update_attributes(complete: true)
+    redirect_to goals_path
+  end
+
 
   private
 

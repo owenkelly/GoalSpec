@@ -3,7 +3,7 @@ class Goal < ActiveRecord::Base
 
 	has_many :goal_updates
 
-	has_many :goal_relationships
+	has_many :goal_relationships, dependent: :delete_all
 									
 	has_many :subgoals, :class_name => "Goal",
 						:foreign_key => "subgoal_id",

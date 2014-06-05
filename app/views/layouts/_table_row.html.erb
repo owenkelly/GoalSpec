@@ -1,18 +1,12 @@
 
-    <% @goals.each do |goal| %>
-    <tr>
-    <% if goal.subgoal_ids == params[:expand_subgoals] %>
-   	<td></td>
-      <td>Goal</td>
-      <td>Due Date</td>
-    </tr>
+    
       <tr>
-      	<td></td>
-        <td><%= link_to goal.goal, goal %></td>
-        <td><%= goal.end %></td>
-        <td><%= link_to "View SubGoals", goals_path(expand_subgoal: goal.id) %>
-        <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to subgoal.goal, subgoal %></td>
+        <td><%= subgoal.end.to_s(:long_ordinal) %></td>
+        <td><%= link_to "View updates", goal_goal_updates_path(subgoal.id) %> </td>
+        <% find_subgoals(subgoal).each do |g| %>
+            <% subgoal = Goal.find(g.goal_id) %>
+            <%= render partial: 'layouts/table_row', locals: {subgoal: subgoal} %>
+            <% end %>
       </tr>
-      <%end%>
-    <% end %>
  

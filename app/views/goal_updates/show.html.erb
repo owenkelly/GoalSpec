@@ -16,4 +16,5 @@
 </p>
 
 <%= link_to 'Edit', [:edit, @goal, @goal_update] %> |
-<%= link_to 'Back', goal_goal_updates_path %>
+<%= link_to 'Back', goal_goal_updates_path %> |
+<%= link_to 'Destroy', [@goal, @goal_update], method: :delete, data: { confirm: 'Are you sure?' } %>

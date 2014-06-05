@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
 
   resources :goals do
+    put :mark_complete
     resources :goal_updates
   end
 

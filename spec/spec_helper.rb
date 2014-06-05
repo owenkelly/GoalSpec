@@ -19,16 +19,12 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
+  config.include Warden::Test::Helpers
+          Warden.test_mode!
 
-  config.before(:suite) do
-    begin
-      DatabaseCleaner.start
-      FactoryGirl.lint
-    ensure
-      DatabaseCleaner.clean
-    end
-  end
-
+  
+  FactoryGirl.lint
+  
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
