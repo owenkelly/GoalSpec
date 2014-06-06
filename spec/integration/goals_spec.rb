@@ -24,15 +24,49 @@ describe "Goals Integration" do
 			Goal.count.should eq goal_count+1
 		end
 
-		it "should be able to assign a supergoal to the current goal" do
-			supergoal = Goal.create(goal: "make a cake")
-			goal = Goal.create(goal: "make a pie")
+
+	end
+
+	context "edit" do
+
+
+		it "should edit a created goal" do
+			goal = Goal.create(goal: "make a pie", user_id: @user.id)
 			visit edit_goal_path(goal)
-			select('make a cake', from: 'goal_supergoal_id')
+			fill_in "Goal", with: "Derp and Lerp"
 			click_link_or_button "Update Goal"
-			goal.reload.supergoal_id.should eq supergoal.id
+			Goal.find(goal.id).reload.goal.should eq "Derp and Lerp"
+		end
+
+
+			it "should be able to assign a supergoal to the current goal" do
+			subgoal = Goal.create(goal: "make a cake", user_id: @user.id)
+			goal = Goal.create(goal: "make a pie", user_id: @user.id)
+			visit edit_goal_path(goal)
+			select('make a cake', from: 'goal_subgoal_ids')
+			click_link_or_button "Update Goal"
+			GoalRelationship.last.reload.subgoal_id.should eq subgoal.id
+		end
+
+	end
+
+	context 'goal updates' do
+
+		before :each do
+			visit new_goal_path(user_id: @user.id)
+			fill_in "Goal", with: "Make a cupcake"
+			fill_in "Description", with: "Because I am huuuungry"
+			click_link_or_button "Create Goal"
+		end
+
+		it "should be able to assign goal updates" do
+			pending
+			#visit new_goal_goal_update_path
+			#click_link_or_button "View Updates"
 		end
 	end
+
+
 
 
 	
