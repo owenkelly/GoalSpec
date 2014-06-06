@@ -10,8 +10,8 @@ class Goal < ActiveRecord::Base
 						through: :goal_relationships
 
 	has_many :supergoals, :class_name => "Goal",
-					:foreign_key => "goal_id",
-					through: :goal_relationships
+							:foreign_key => "goal_id",
+							through: :goal_relationships
 
 	validates :goal, presence: true
 
